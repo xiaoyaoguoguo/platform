@@ -1,0 +1,29 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: test-fourservice
+  profiles:
+    active: druid
+  messages:
+    basename: il8n/messages
+
+# MyBatis
+mybatis:
+  typeAliasesPackage: com.panda.project
+  mapperLocations: classpath:mybatis/**/*Mapper.xml
+  configLocation: classpath:mybatis/mybatis-config.xml
+
+#pagehelper
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
+
+#日志配置
+logging:
+  level:
+    com.ruoyi: debug
+    org.springframework: WARN
+    org.spring.springboot.dao: debug
