@@ -30,7 +30,7 @@ public class UserController {
     @GetMapping("/userList")
     @Auth(isAuth = true)
     @ResponseBody
-    public PageInfo<User> getAllUser(){
+    public PageInfo<User> getAllUser() {
 
 //        PageHelper.startPage(1, 2);
         List<User> userList = userService.getAllUser();
@@ -41,18 +41,26 @@ public class UserController {
 
     @PostMapping("/login")
     @ResponseBody
-    public JsonReturn login(){
+    public JsonReturn login() {
         UserDto userDto = new UserDto();
         userDto.setUserId(UUID.randomUUID().toString());
         AuthUtils.setUser(userDto);
         return new JsonReturn();
     }
+
     @PostMapping("/userInfo")
     @ResponseBody
     @Auth(isAuth = true)
-    public JsonReturn userInfo(){
+    public JsonReturn userInfo() {
 
         return new JsonReturn(AuthUtils.getUser());
+    }
+
+    @GetMapping("/logout")
+    @ResponseBody
+    public JsonReturn logout() {
+        AuthUtils.removeUser();
+        return new JsonReturn();
     }
 
 

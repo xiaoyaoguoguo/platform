@@ -17,6 +17,7 @@ import javax.servlet.http.HttpSession;
  **/
 public class AuthUtils {
 
+    /**session存储*/
     private static final String USER = "current_user";
     private static final String CID = "cid";
 
@@ -37,7 +38,6 @@ public class AuthUtils {
         String cid = CookieUtils.get(CID);
         if (StringUtils.isBlank(cid)) {
             cid = SessionUtils.getSession().getId();
-            System.out.println(cid);
             CookieUtils.setSid(CID, cid);
         }
         RedisUtil redisUtil = SpringUtils.getBean("redisUtil");
@@ -55,6 +55,23 @@ public class AuthUtils {
         }
         return userDto;
     }
+
+    public static void removeUser(){
+        UserDto userDto = (UserDto) SessionUtils.getSession().getAttribute(USER);
+        if(userDto!=null){
+            SessionUtils.getSession().removeAttribute(USER);
+        }
+        RedisUtil redisUtil = SpringUtils.getBean("redisUtil");
+        String cid = CookieUtils.get(CID);
+        if (!StringUtils.isBlank(cid)) {
+            UserDto temp = (UserDto) redisUtil.get(cid);
+            if(temp!=null){
+                redisUtil.del(cid);
+            }
+        }
+    }
+
+
 
 
 }

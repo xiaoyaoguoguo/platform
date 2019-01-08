@@ -33,6 +33,15 @@ public class CookieUtils {
         StringBuilder buffer = new StringBuilder();
         buffer.append(key).append("=").append(value).append(";");
         buffer.append("path=").append("/").append(";");
+        buffer.append("HttpOnly;");
+        response.addHeader("Set-Cookie", buffer.toString());
+    }
+
+    public static void setSSLSid(String key, String value) {
+        HttpServletResponse response = SessionUtils.getRes();
+        StringBuilder buffer = new StringBuilder();
+        buffer.append(key).append("=").append(value).append(";");
+        buffer.append("path=").append("/").append(";");
         buffer.append("Secure;");
         buffer.append("HttpOnly;");
         response.addHeader("Set-Cookie", buffer.toString());
