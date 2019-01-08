@@ -17,7 +17,7 @@ import java.util.concurrent.TimeUnit;
  * @data 2019-01-07 15:15
  **/
 @Component
-public class RedisUtil {
+public class RedisUtil implements RedisDao{
     @Autowired
     private RedisTemplate<String, Object> redisTemplate;
     // =============================common============================
@@ -29,6 +29,7 @@ public class RedisUtil {
      * @param time 时间(秒)
      * @return
      */
+    @Override
     public boolean expire(String key, long time) {
         try {
             if (time > 0) {
@@ -89,6 +90,7 @@ public class RedisUtil {
      * @param key 键
      * @return 值
      */
+    @Override
     public Object get(String key) {
         return key == null ? null : redisTemplate.opsForValue().get(key);
     }
@@ -100,6 +102,7 @@ public class RedisUtil {
      * @param value 值
      * @return true成功 false失败
      */
+    @Override
     public boolean set(String key, Object value) {
         try {
             redisTemplate.opsForValue().set(key, value);
@@ -118,6 +121,7 @@ public class RedisUtil {
      * @param time  时间(秒) time要大于0 如果time小于等于0 将设置无限期
      * @return true成功 false 失败
      */
+    @Override
     public boolean set(String key, Object value, long time) {
         try {
             if (time > 0) {
