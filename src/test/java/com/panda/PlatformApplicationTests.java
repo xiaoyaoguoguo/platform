@@ -1,5 +1,6 @@
 package com.panda;
 
+import com.panda.common.utils.MessageUtils;
 import com.panda.common.utils.SessionUtils;
 import com.panda.common.utils.redis.RedisDao;
 import com.panda.common.utils.redis.RedisUtil;
@@ -9,13 +10,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
-import org.springframework.web.context.support.WebApplicationContextUtils;
-
-import javax.servlet.http.HttpServletRequest;
 
 
 @RunWith(SpringRunner.class)
@@ -29,15 +24,14 @@ public class PlatformApplicationTests {
 //        redisUtil.set("123","你好啊啊",20);
 //
 //
-        UserDto o = (UserDto)redisUtil.get("E680A6C48882912E2F4B96C6E3FE3F0B");
-        System.out.println(o.toString());
+//        UserDto o = (UserDto)redisUtil.get("E680A6C48882912E2F4B96C6E3FE3F0B");
+//        System.out.println(o.toString());
 
 
-//        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-//
-//        ThreadLocal<HttpServletRequest> reqLocal = new ThreadLocal();
-//
-//        System.out.println(reqLocal.get().getSession().getId());
+        String message = MessageUtils.message("test", "");
+        System.out.println(message);
+
+
     }
 
 }

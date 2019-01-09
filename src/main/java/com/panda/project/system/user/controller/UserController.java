@@ -4,6 +4,8 @@ import com.github.pagehelper.PageInfo;
 import com.panda.common.utils.auth.AuthUtils;
 import com.panda.framework.domain.JsonReturn;
 import com.panda.framework.domain.UserDto;
+import com.panda.framework.web.controller.BaseController;
+import com.panda.framework.web.page.TableDataInfo;
 import com.panda.project.system.user.domain.User;
 import com.panda.project.system.user.service.UserService;
 import com.panda.framework.aspectj.lang.annotation.Auth;
@@ -23,20 +25,20 @@ import java.util.UUID;
  * @data 2019-01-04 12:01
  **/
 @RestController
-public class UserController {
+public class UserController extends BaseController {
     @Autowired
     private UserService userService;
 
     @GetMapping("/userList")
     @Auth(isAuth = true)
     @ResponseBody
-    public PageInfo<User> getAllUser() {
-
-//        PageHelper.startPage(1, 2);
+    public TableDataInfo getAllUser() {
+        startPage();
         List<User> userList = userService.getAllUser();
 
-        PageInfo<User> pageInfo = new PageInfo<>(userList);
-        return pageInfo;
+//        PageInfo<User> pageInfo = new PageInfo<>(userList);
+        return getDataTable(userList);
+//        return pageInfo;
     }
 
     @PostMapping("/login")
@@ -52,7 +54,6 @@ public class UserController {
     @ResponseBody
     @Auth(isAuth = true)
     public JsonReturn userInfo() {
-
         return new JsonReturn(AuthUtils.getUser());
     }
 
