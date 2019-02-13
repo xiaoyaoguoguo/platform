@@ -28,7 +28,7 @@ public class UserServiceImpl implements UserService {
         List<User> user = userMapper.getAllUser();
         String stringArray[] = {"微学苑", "http://www.weixueyuan.net", "一切编程语言都是纸老虎"};
 
-        throw new BaseException("1000",stringArray);
-//        return user;
+//        throw new BaseException("1000",stringArray);
+        return user;
     }
 }

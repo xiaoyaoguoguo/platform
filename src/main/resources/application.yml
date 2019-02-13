@@ -27,3 +27,9 @@ logging:
     com.panda: debug
     org.springframework: WARN
     org.spring.springboot.dao: debug
+
+#ElasticSearch全文搜索配置
+elasticSearch:
+  clusterName: es
+  ip: 47.98.200.229
+  port: 9300

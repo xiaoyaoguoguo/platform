@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.UUID;
 
@@ -32,10 +33,10 @@ public class UserController extends BaseController {
     @GetMapping("/userList")
     @Auth(isAuth = true)
     @ResponseBody
-    public TableDataInfo getAllUser() {
+    public TableDataInfo getAllUser(HttpServletResponse response) {
         startPage();
         List<User> userList = userService.getAllUser();
-
+        response.setHeader("token","1231348635");
 //        PageInfo<User> pageInfo = new PageInfo<>(userList);
         return getDataTable(userList);
 //        return pageInfo;
